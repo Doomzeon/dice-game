@@ -1,0 +1,249 @@
+{
+  "version": "0.1.0",
+  "name": "dice_game",
+  "instructions": [
+    {
+      "name": "initiliazeAdmin",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "coreState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "playerPrediction",
+      "accounts": [
+        {
+          "name": "degen",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "coreState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "degenPrediction",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "houseTreasuryPda",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "prediction",
+          "type": {
+            "defined": "PredictionDice"
+          }
+        }
+      ]
+    },
+    {
+      "name": "rollDice",
+      "accounts": [
+        {
+          "name": "degen",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "degenPrediction",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "houseTreasuryPda",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "coreState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "counter",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "widthdrawAmount",
+      "accounts": [
+        {
+          "name": "degen",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "degenPrediction",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "houseTreasuryPda",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "coreState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "withdrawFunds",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "houseTreasuryPda",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "coreState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "CoreState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "flipCounter",
+            "type": "u64"
+          },
+          {
+            "name": "admin",
+            "type": "publicKey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DegenPrediction",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "prediction",
+            "type": {
+              "defined": "PredictionDice"
+            }
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "result",
+            "type": {
+              "defined": "GameResult"
+            }
+          },
+          {
+            "name": "counter",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "PredictionDice",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Even"
+          },
+          {
+            "name": "Shots"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GameResult",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Win"
+          },
+          {
+            "name": "Lost"
+          },
+          {
+            "name": "Proccessing"
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "address": "4zngQHehWtsmBVs3tJvLHexeUZLQDbv3XCDfReJP6TQH"
+  }
+}

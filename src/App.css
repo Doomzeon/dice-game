@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+:root{
+  --background-buttons: #DD8C14;
+  --font-text: 'CHANEY';
+  --background-image-mc: url("./assets/whale.png");
+  --background-image-dc: url("./assets/dcw.svg");
+  --background-buttons-selected: #EEA437;
+  --text-size: 19px;
+}
+
+[data-theme='dark'] {
+  --background-buttons: #664B9D;
+  --font-text: 'Minecraft Rus';;
+  --background-image-mc: url("./assets/bg.jpg");
+  --background-image-dc: url("./assets/dc1.svg");
+  --background-buttons-selected: #924AF2;
+  --text-size: 25px;
+}
