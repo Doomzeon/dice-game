@@ -1,6 +1,6 @@
 .dc__main_container {
     width: 100%;
-    height: 100%;
+    height: 100px;
     background-image: var(--background-image-mc);
     background-repeat: no-repeat;
 
