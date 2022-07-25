@@ -207,3 +207,26 @@
 .disabled:hover{
     cursor: not-allowed;
 }
+
+
+
+@media screen and (min-width: 360px ) and (max-width: 650px) {
+
+    .dc__bet_button_even, .dc__bet_button_ods{
+        width: 150px;
+        font-size: 20px;
+    }
+    .dc__sol_option_button{
+        width: 90px;
+        font-size: 20px;
+    }
+
+    .dc__play_button{
+        width: 333px;
+        font-size: 20px;
+    }
+    .dc__play_button_again{
+        width: 333px;
+        font-size: 20px;
+    }
+}

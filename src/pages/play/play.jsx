@@ -320,16 +320,16 @@ function PlayDC() {
                                         </button>}
 
                                     {amount != 0 && amount == 1 * LAMPORTS_PER_SOL
-                                        ? <button disabled className="dc__sol_option_button sol_option_active disabled" onClick={() => setUserAmountBet(1.0 * LAMPORTS_PER_SOL)}>
+                                        ? <button className="dc__sol_option_button sol_option_active disabled" onClick={() => setUserAmountBet(1.0 * LAMPORTS_PER_SOL)}>
                                             1 SOL
-                                        </button> : <button disabled className="dc__sol_option_button disabled" onClick={() => setUserAmountBet(1.0 * LAMPORTS_PER_SOL)}>
+                                        </button> : <button className="dc__sol_option_button disabled" onClick={() => setUserAmountBet(1.0 * LAMPORTS_PER_SOL)}>
                                             1 SOL
                                         </button>}
 
                                     {amount != 0 && amount == 1.5 * LAMPORTS_PER_SOL
-                                        ? <button disabled className="dc__sol_option_button disabled sol_option_active" onClick={() => setUserAmountBet(1.5 * LAMPORTS_PER_SOL)}>
+                                        ? <button className="dc__sol_option_button disabled sol_option_active" onClick={() => setUserAmountBet(1.5 * LAMPORTS_PER_SOL)}>
                                             1.5 SOL
-                                        </button > : <button disabled className="dc__sol_option_button disabled" onClick={() => setUserAmountBet(1.5 * LAMPORTS_PER_SOL)}>
+                                        </button > : <button className="dc__sol_option_button disabled" onClick={() => setUserAmountBet(1.5 * LAMPORTS_PER_SOL)}>
                                             1.5 SOL
                                         </button>}
 

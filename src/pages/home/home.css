@@ -7,6 +7,9 @@
     background-size: cover;
 }
 
+
+
+
 body {
     margin: 0;
     padding: 0;
@@ -120,7 +123,10 @@ body {
     height: 45px;
     display: flex;
     flex-direction: row;
+    
 }
+
+
 
 .dc__navbar_item_switch_container{
     display: flex;
@@ -189,4 +195,28 @@ body {
 
 .dc__navbar_item_dice_prediction_container:hover{
     cursor: not-allowed;
+}
+
+
+
+
+@media screen and (min-width: 360px ) and (max-width: 650px) {
+    .dc__navbar_container{
+        padding-top: 5px !important;
+        padding-left: 0 !important;
+        
+    }
+
+    .dc__navbar_item_dice_game_container, .dc__navbar_item_dice_prediction_container{
+        width: 126px;
+    }
+
+    .dc__home_title_container h2{
+
+    font-size: 25px;
+    }
+    .dc__home_image_dc_container{
+        width: 250px;
+    }
+
 }
