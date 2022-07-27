@@ -110,16 +110,18 @@ function PlayTwoDC() {
             if (firstNumber + 1 <= 9) {
                 let s = firstNumber+1;
                 console.log(s)
+                console.log(firstNumber)
+                console.log(firstNumber+2)
 
                 setFirstNumber(s)
-                console.log(s+3)
-                setSecondNumber(s + 3)
+                console.log(s+2)
+                setSecondNumber(s + 1)
             }
         } else {
             if (firstNumber - 1 > 0) {
                 let s = firstNumber-1;
                 setFirstNumber(s)
-                setSecondNumber(s + 3)
+                setSecondNumber(s + 1)
             }
         }
     }
@@ -272,7 +274,7 @@ function PlayTwoDC() {
 
                                 <div className="dc__bet_container_hint">
                                     <p className="dc__play_bet_text_hint">
-                                        Only 4 numbers in range will be considerate
+                                        Only 2 numbers in range will be considerate
                                     </p>
 
                                 </div>
