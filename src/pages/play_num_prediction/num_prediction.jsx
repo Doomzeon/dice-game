@@ -107,7 +107,7 @@ function PlayTwoDC() {
     function manageFirstNumber(operator) {
 
         if (operator == "+") {
-            if (firstNumber + 1 <= 10) {
+            if (firstNumber + 1 <= 11) {
                 let s = firstNumber+1;
                 console.log(s)
                 console.log(firstNumber)

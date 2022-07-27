@@ -59,7 +59,7 @@ const checkWithdrawTwoDice = async function (provider, program, wallet, counter)
         const account = await program.account.degenPredictionNumbers.fetch(_wallet_pda)
 
         console.log(account)
-        let msg = "You won " + (account.amount/LAMPORTS_PER_SOL)*3  + " SOL. GG"
+        let msg = "You won " + Math.round((account.amount/LAMPORTS_PER_SOL)*3 * 100) / 100  + " SOL. GG"
 
         let result_k = Object.keys(account.result)
         if (result_k[0] == "lost"){
