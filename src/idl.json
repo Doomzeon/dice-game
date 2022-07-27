@@ -162,6 +162,117 @@
           "type": "u64"
         }
       ]
+    },
+    {
+      "name": "playerNumberPrediction",
+      "accounts": [
+        {
+          "name": "degen",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "degenPredictionNums",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "houseTreasuryPda",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "coreState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "firstNumber",
+          "type": "u32"
+        },
+        {
+          "name": "secondNumber",
+          "type": "u32"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "rollTwoDice",
+      "accounts": [
+        {
+          "name": "degen",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "degenPredictionNums",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "houseTreasuryPda",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "coreState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "counter",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "widthdrawAmountNumberPrediction",
+      "accounts": [
+        {
+          "name": "degen",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "degenPredictionNums",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "houseTreasuryPda",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "coreState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
     }
   ],
   "accounts": [
@@ -191,6 +302,36 @@
             "type": {
               "defined": "PredictionDice"
             }
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "result",
+            "type": {
+              "defined": "GameResult"
+            }
+          },
+          {
+            "name": "counter",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DegenPredictionNumbers",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "firstNumber",
+            "type": "u32"
+          },
+          {
+            "name": "secondNumber",
+            "type": "u32"
           },
           {
             "name": "amount",

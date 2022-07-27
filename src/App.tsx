@@ -25,8 +25,8 @@ import { createDefaultAuthorizationResultCache, SolanaMobileWalletAdapter } from
 // Default styles that can be overridden by your app
 require('@solana/wallet-adapter-react-ui/styles.css');
 function App() {
-  const network = WalletAdapterNetwork.Mainnet;
-  const networks = clusterApiUrl('mainnet-beta');
+  const network = WalletAdapterNetwork.Testnet;
+  const networks = clusterApiUrl('devnet');
   // You can also provide a custom RPC endpoint.
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
 

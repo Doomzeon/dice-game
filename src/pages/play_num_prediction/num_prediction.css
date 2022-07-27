@@ -1,0 +1,294 @@
+.dc__play_main_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 600px;
+
+}
+
+.loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+}
+
+.dc__play_title_bet_options_container,
+.dc__play_title_sol_option_container,
+.dc__play_result_prediction_title_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.dc__play_title_bet_options_container h3,
+.dc__play_title_sol_option_container h3,
+.dc__play_result_prediction_title_container h4 {
+    font-family: var(--font-text);
+    font-style: normal;
+    font-weight: 400;
+    font-size: var(--text-size);
+    line-height: 25px;
+    /* identical to box height */
+
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+
+}
+
+
+.dc__bet_button_even,
+.dc__bet_button_ods {
+    border-radius: 24px;
+    margin: 0 15px;
+
+    border: 0px solid white;
+
+    cursor: pointer;
+    font-family: var(--font-text);
+    font-style: normal;
+    font-weight: 400;
+    font-size: var(--text-size);
+    line-height: 25px;
+    /* identical to box height */
+
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+
+
+    text-align: center !important;
+
+    width: 271px;
+    height: 67px;
+    left: 428px;
+    top: 527px;
+
+    background: var(--background-buttons);
+    box-shadow: -1px 26px 23px rgba(0, 0, 0, 0.55);
+    border-radius: 6px;
+}
+
+
+
+.dc__play_sol_options_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+
+.dc__play_sol_options_row1,
+.dc__play_sol_options_row2 {
+    display: flex;
+    flex-direction: row;
+
+    margin: 10px 10px;
+
+}
+
+.dc__sol_option_button {
+
+    margin: 0 15px;
+    border: 0px solid white;
+
+
+
+    cursor: pointer;
+
+    font-family: var(--font-text);
+    font-style: normal;
+    font-weight: 400;
+    font-size: var(--text-size);
+    line-height: 25px;
+    /* identical to box height */
+
+    text-transform: uppercase;
+
+
+    text-align: center !important;
+    color: white;
+
+
+    width: 174px;
+    height: 67px;
+    left: 636px;
+    top: 689px;
+
+    background: var(--background-buttons);
+    box-shadow: -1px 26px 23px rgba(0, 0, 0, 0.55);
+    border-radius: 6px;
+
+}
+
+
+
+
+.dc__play_container,
+.dc__play_result_predictionplay_again_button_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.dc__play_button,
+.dc__play_button_again {
+    border-radius: 24px;
+    margin: 0 15px;
+
+    border: 0px solid white;
+
+    cursor: pointer;
+
+    font-family: var(--font-text);
+    font-style: normal;
+    font-weight: 400;
+    font-size: var(--text-size);
+    line-height: 25px;
+    /* identical to box height */
+
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+
+    padding: 0 24px;
+
+
+
+    text-align: center !important;
+
+
+    width: 584px;
+    height: 67px;
+    left: 428px;
+    top: 896px;
+
+    background: var(--background-buttons);
+    box-shadow: -1px 26px 23px rgba(0, 0, 0, 0.55);
+    border-radius: 6px;
+}
+
+
+.dc__play_result_prediction_main_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.green {
+    color: #267911 !important;
+}
+
+.red {
+    color: #c03232 !important;
+}
+
+
+.selected_prediction,
+.sol_option_active {
+    background: var(--background-buttons-selected);
+    border: 2px solid #E9DCFF;
+    box-shadow: -1px 26px 23px rgba(0, 0, 0, 0.55);
+    border-radius: 6px;
+}
+
+
+
+.disabled:hover {
+    cursor: not-allowed;
+}
+
+
+
+.dc__play_bet_options_container {
+    display: flex;
+    flex-direction: row;
+
+
+}
+
+.dc__play_bet_first_number_container,
+.dc__play_bet_second_number_container {
+    display: flex;
+    flex-direction: row;
+
+    width: 172px;
+    height: 67px;
+    background: var(--background-buttons);
+    box-shadow: -1px 26px 23px rgba(0, 0, 0, 0.55);
+    border-radius: 6px;
+
+}
+.dc__bet_container_hint{
+    width: 236px;
+}
+
+.dc__play_bet_plus_num_container {
+    width: 20%;
+}
+.dc__play_bet_plus_num_container:hover, .dc__play_bet_minus_num_container:hover{
+    cursor: pointer;
+}
+
+.dc__play_bet_num_container {
+    width: 60%;
+}
+
+.dc__play_bet_minus_num_container {
+    width: 20%;}
+
+
+    .dc__play_bet_text_hint{
+    font-family: var(--font-text);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 25px;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+    }
+
+.dc__play_bet_text{
+    font-family: var(--font-text);
+    font-style: normal;
+    font-weight: 400;
+    font-size: var(--text-size);
+    line-height: 25px;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+}
+
+.second_cont_dis:hover{
+    cursor: not-allowed !important;
+}
+
+@media screen and (min-width: 360px) and (max-width: 650px) {
+
+    .dc__bet_button_even,
+    .dc__bet_button_ods {
+        width: 150px;
+        font-size: 20px;
+    }
+
+    .dc__sol_option_button {
+        width: 90px;
+        font-size: 20px;
+    }
+
+    .dc__play_button {
+        width: 333px;
+        font-size: 20px;
+    }
+
+    .dc__play_button_again {
+        width: 333px;
+        font-size: 20px;
+    }
+}

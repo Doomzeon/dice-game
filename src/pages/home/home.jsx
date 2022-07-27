@@ -3,7 +3,7 @@ import "./home.css"
 
 import dicePNG from "../../assets/dc.png"
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { PlayDC } from "../index"
+import { PlayDC, PlayTwoDC } from "../index"
 import dark_svg from "../../assets/dark.svg"
 import light_svg from "../../assets/light.svg"
 
@@ -20,7 +20,8 @@ function HomeDC() {
 
     const { connection } = useConnection();
     const { publicKey, sendTransaction } = useWallet();
-    const [theme, setTheme ] = useState("dark")
+    const [theme, setTheme] = useState("dark")
+    const [firstPage, setFirstPage] = useState(true)
 
     useEffect(() => {
         console.log('uSER CONNCTED THE WALLET', publicKey)
@@ -62,13 +63,28 @@ function HomeDC() {
 
                 </div>
 
-                <div className="dc__navbar_item_dice_game_container navbar_link_active">
-                    <a className="navbar_link"> Dice EVEN/ODD</a>
-                </div>
 
-                <div className="dc__navbar_item_dice_prediction_container">
-                    <a className="navbar_link"> Dice PREDICTION</a>
-                </div>
+
+                {
+                    firstPage
+                        ? <div className="dc__navbar_item_dice_game_container navbar_link_active" onClick={() => { setFirstPage(true) }}>
+                            <a className="navbar_link"> Dice EVEN/ODD</a>
+                        </div>
+                        : <div className="dc__navbar_item_dice_game_container" onClick={() => { setFirstPage(true) }}>
+                            <a className="navbar_link"> Dice EVEN/ODD</a>
+                        </div>
+                }
+
+                {
+
+                    firstPage
+                        ? <div className="dc__navbar_item_dice_prediction_container" onClick={() => { setFirstPage(false) }}>
+                            <a className="navbar_link"> Dice PREDICTION</a>
+                        </div>
+                        : <div className="dc__navbar_item_dice_prediction_container navbar_link_active" onClick={() => { setFirstPage(false) }}>
+                            <a className="navbar_link"> Dice PREDICTION</a>
+                        </div>
+                }
 
 
             </div>
@@ -91,7 +107,14 @@ function HomeDC() {
                     {
                         walletConnected
                             ? <div>
-                                <PlayDC />
+                                {
+                                    firstPage
+                                        ? <PlayDC />
+                                        : <PlayTwoDC />
+
+                                }
+
+
                             </div>
 
                             : <WalletModalProvider>

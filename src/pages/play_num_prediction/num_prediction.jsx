@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from "react"
-import "./play.css"
+import "./num_prediction.css"
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import registerPlayerPredictionTx from "../../utils/dice-game"
-import rollItDegen from "../../utils/rol-it";
-import idl from '../../idl.json';
+import registerPlayerPredictionTwoDiceTx from "../../utils/two-dice-game"
+import rollTwoDegen from "../../utils/roll-two-dice"
+import checkWithdrawTwoDice from "../../utils/withdraw-two-dice"
 import initialzee from "../../utils/initialize"
 import { Connection, LAMPORTS_PER_SOL, PublicKey, clusterApiUrl } from '@solana/web3.js';
-import checkWithdraw from "../../utils/withdraw"
+
 import BeatLoader from "react-spinners/BeatLoader";
 import * as anchor from "@project-serum/anchor";
 
+import idl from '../../idl.json';
 
-function PlayDC() {
+
+function PlayTwoDC() {
 
     const [userPredictionResult, setUserPredictionResult] = useState("...")
 
-    const [prediction, setUserPrediction] = useState("even")
+    const [firstNumber, setFirstNumber] = useState(4)
+    const [secondNumber, setSecondNumber] = useState(6)
 
     const [amount, setUserAmountBet] = useState(0.05 * LAMPORTS_PER_SOL)
 
     const [load, setLoad] = useState(false)
 
-    
     const programID = new PublicKey(idl.metadata.address);
     clusterApiUrl('mainnet-beta')
     const wallet = useWallet()
@@ -29,58 +31,36 @@ function PlayDC() {
         preflightCommitment: "processed"
     }
 
-
-    
-    async function getProvider() {
-        const networks = clusterApiUrl('mainnet-beta');
-        /* create the provider and return it to the caller */
-        /* network set to local network for now */
-        const network = "http://127.0.0.1:8899";
-        const connection = new Connection(networks, opts.preflightCommitment);
-
-        const provider = new anchor.AnchorProvider(
-            connection, wallet, opts.preflightCommitment,
-        );
-        // await provider.connection.requestAirdrop(
-        //     wallet.publicKey,
-        //     2 * 100000000
-        // );
-        return provider;
-    }
-
-
-    /*New logic */
-
-    //Check on user connect wallet if counter in localstoage is set to none
-
-     useState(async ()=>{
+    /*New logic*/
+    useState(async ()=>{
+        const provider = await getProvider();
+        const program = new anchor.Program(idl, programID, provider);
 
         let counter = localStorage.getItem("counter");
         let step_ = localStorage.getItem("step_");
-        const provider = await getProvider();
-        const program = new anchor.Program(idl, programID, provider);
 
         if(counter != null){
             // If counter is != null look throught step on which user finished exp.
             if(step_ == null || step_ == ""){
                 console.log('User has not any state....')
 
-            }else if(step_ == "withdraw_success_even_odd"){
+            }else if(step_ == "withdraw_success_2_dice"){
                 //User was withdraw go and make him roll the dice 
-                const txIdRolling = await rollItDegen(
+                const txIdRolling = await rollTwoDegen(
                     provider,
                     program,
                     wallet,
                     counter
                 )
-                localStorage.setItem("step_", "rolled_dice_even_odd")
 
-                const result  = await checkWithdraw(
-                    provider,
-                    program,
-                    wallet,
-                    counter
-                )
+                localStorage.setItem("step_", "rolled_2_dice")
+
+                const result = await checkWithdrawTwoDice(
+                provider,
+                program,
+                wallet,
+                counter
+            )
 
                 console.log(result)
     
@@ -89,9 +69,10 @@ function PlayDC() {
                 setLoad(false)
                 localStorage.setItem("step_", "")
 
-            } else if(step_ == "rolled_dice_even_odd"){
+            } else if(step_ == "rolled_2_dice"){
                 //user rolled already dice go and check the result of dice
-                const result  = await checkWithdraw(
+
+                const result = await checkWithdrawTwoDice(
                     provider,
                     program,
                     wallet,
@@ -118,26 +99,53 @@ function PlayDC() {
         }
 
     }, [])
-
     /* End new logic*/
 
 
 
-    /*Remove from production */
-    
 
+    function manageFirstNumber(operator) {
 
+        if (operator == "+") {
+            if (firstNumber + 1 <= 9) {
+                let s = firstNumber+1;
+                console.log(s)
 
-    async function rollIt() {
+                setFirstNumber(s)
+                console.log(s+3)
+                setSecondNumber(s + 3)
+            }
+        } else {
+            if (firstNumber - 1 > 0) {
+                let s = firstNumber-1;
+                setFirstNumber(s)
+                setSecondNumber(s + 3)
+            }
+        }
+    }
+
+    async function getProvider() {
+        const networks = clusterApiUrl('mainnet-beta');
+        /* create the provider and return it to the caller */
+        /* network set to local network for now */
+        const network = "http://127.0.0.1:8899";
+        const connection = new Connection(networks, opts.preflightCommitment);
+
+        const provider = new anchor.AnchorProvider(
+            connection, wallet, opts.preflightCommitment,
+        );
+        // await provider.connection.requestAirdrop(
+        //     wallet.publicKey,
+        //     2 * 100000000
+        // );
+        return provider;
+    }
+
+    async function rollTwoDice() {
         setLoad(true)
         const provider = await getProvider();
         const program = new anchor.Program(idl, programID, provider);
 
-        let prediction_struct = { shots: {} };
-
-        if (prediction == "even") {
-            prediction_struct = { even: {} }
-        }
 
 
         // const txId = await initialzee(
@@ -146,43 +154,42 @@ function PlayDC() {
         //     wallet
         // )
 
-            const account = await program.account.coreState.all();
-            let counter = account[0].account.flipCounter.toNumber()
+        const account = await program.account.coreState.all();
+        let counter = account[0].account.flipCounter.toNumber()
 
-            try{
-            const txId_registrationPrediction = await registerPlayerPredictionTx(
+        try {
+            const txId_registrationPrediction = await registerPlayerPredictionTwoDiceTx(
                 provider,
                 program,
-                prediction_struct,
+                firstNumber,
+                secondNumber,
                 amount,
                 wallet,
                 counter
             )
-
             localStorage.setItem("counter", counter)
-            localStorage.setItem("step_", "withdraw_success_even_odd")
+            localStorage.setItem("step_", "withdraw_success_2_dice")
 
-            // if (!txId_registrationPrediction) throw new Error({'Error':'rer'});
-             console.log(txId_registrationPrediction)
+            console.log(txId_registrationPrediction)
 
-            const txIdRolling = await rollItDegen(
+            const txIdRolling = await rollTwoDegen(
                 provider,
                 program,
                 wallet,
                 counter
             )
-            localStorage.setItem("step_", "rolled_dice_even_odd")
+            localStorage.setItem("step_", "rolled_2_dice")
 
 
-            const result  = await checkWithdraw(
+            const result = await checkWithdrawTwoDice(
                 provider,
                 program,
                 wallet,
                 counter
             )
+            if (!result) throw new Error({ 'Error': 'rer' });
             localStorage.setItem("step_", "")
             localStorage.setItem("counter", null)
-            
 
             console.log(result)
 
@@ -192,16 +199,11 @@ function PlayDC() {
             setLoad(false)
         }
 
-        catch(err){
-            alert("An error occured please contact dev team")
+        catch (err) {
+            console.log(err)
             setLoad(false)
         }
-
-        setLoad(false)
-
-
-
-    }
+     }
 
     return (
 
@@ -212,7 +214,7 @@ function PlayDC() {
             {
                 load
                     ? <div className="loader">
-                        <BeatLoader/>
+                        <BeatLoader />
                     </div>
 
 
@@ -247,27 +249,52 @@ function PlayDC() {
 
                             <div className="dc__play_bet_options_container">
 
-                                {
-                                    prediction != "" && prediction == "even"
-                                        ? <button className="dc__bet_button_even selected_prediction" onClick={() => setUserPrediction("even")}>
-                                            EVEN
-                                        </button>
-                                        : <button className="dc__bet_button_even" onClick={() => setUserPrediction("even")}>
-                                            EVEN
-                                        </button>
-                                }
+                                <div className="dc__play_bet_first_number_container">
+
+                                    <div className="dc__play_bet_minus_num_container" onClick={() => {
+                                        manageFirstNumber("-")
+                                    }}>
+                                        <p className="dc__play_bet_text">-</p>
+                                    </div>
+
+                                    <div className="dc__play_bet_num_container">
+                                        <p className="dc__play_bet_text">{firstNumber}</p>
+                                    </div>
+
+                                    <div className="dc__play_bet_plus_num_container" onClick={() => {
+                                        manageFirstNumber("+")
+                                    }}>
+                                        <p className="dc__play_bet_text">+</p>
+                                    </div>
 
 
+                                </div>
 
-                                {
-                                    prediction != "" && prediction == "ods"
-                                        ? <button className="dc__bet_button_ods selected_prediction" onClick={() => setUserPrediction("ods")}>
-                                            ODD
-                                        </button>
-                                        : <button className="dc__bet_button_ods" onClick={() => setUserPrediction("ods")}>
-                                            ODD
-                                        </button>
-                                }
+                                <div className="dc__bet_container_hint">
+                                    <p className="dc__play_bet_text_hint">
+                                        Only 4 numbers in range will be considerate
+                                    </p>
+
+                                </div>
+
+                                <div className="dc__play_bet_second_number_container">
+
+                                    <div className="dc__play_bet_minus_num_container second_cont_dis" onClick={() => {
+
+                                    }}>
+                                        <p className="dc__play_bet_text">-</p>
+                                    </div>
+
+                                    <div className="dc__play_bet_num_container">
+                                        <p className="dc__play_bet_text">{secondNumber}</p>
+                                    </div>
+
+                                    <div className="dc__play_bet_plus_num_container second_cont_dis">
+                                        <p className="dc__play_bet_text">+</p>
+                                    </div>
+
+                                </div>
+
 
                             </div>
 
@@ -332,8 +359,10 @@ function PlayDC() {
                             </div>
 
                             <div className="dc__play_container">
-                                <button className="dc__play_button" onClick={() => rollIt()}>
-                                    DOUBLE OR NOTHING DEGEN!
+                                <button className="dc__play_button" onClick={() => {
+                                    rollTwoDice()
+                                }}>
+                                    TRIPPLE OR NOTHING DEGEN!
                                 </button>
                             </div></>}
 
@@ -347,10 +376,6 @@ function PlayDC() {
     )
 
 
-        }
+}
 
-    export default PlayDC
-
-
-
-
+export default PlayTwoDC

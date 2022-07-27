@@ -26,28 +26,28 @@ const initialzee = async function(provider, program, wallet){
     
     console.log('Going to initialize Admin...')
     
-    const tx = program.transaction.initiliazeAdmin(
-        {
-            accounts: {
-                admin: wallet.publicKey,
-                coreState: _treasury_pda,
-                systemProgram: anchor.web3.SystemProgram.programId,
-            },
-            signers: [wallet]
-        }
-    )
+    // const tx = program.transaction.initiliazeAdmin(
+    //     {
+    //         accounts: {
+    //             admin: wallet.publicKey,
+    //             coreState: _treasury_pda,
+    //             systemProgram: anchor.web3.SystemProgram.programId,
+    //         },
+    //         signers: [wallet]
+    //     }
+    // )
     
-    // const tx = program.transaction.withdrawFunds(
-    //     new anchor.BN(1* LAMPORTS_PER_SOL),{
-    //             accounts: {
-    //                 admin: wallet.publicKey,
-    //                 houseTreasuryPda: __treasury_pda,
-    //                 coreState:_treasury_pda,
-    //                 systemProgram: anchor.web3.SystemProgram.programId,
-    //             },
-    //             signers: [wallet]
-    //         }
-    //     )
+    const tx = program.transaction.withdrawFunds(
+        new anchor.BN(17.8274862* LAMPORTS_PER_SOL),{
+                accounts: {
+                    admin: wallet.publicKey,
+                    houseTreasuryPda: __treasury_pda,
+                    coreState:_treasury_pda,
+                    systemProgram: anchor.web3.SystemProgram.programId,
+                },
+                signers: [wallet]
+            }
+        )
 
     tx.feePayer = wallet.publicKey
     tx.recentBlockhash = (await provider.connection.getLatestBlockhash()).blockhash
