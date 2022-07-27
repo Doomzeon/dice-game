@@ -55,15 +55,15 @@ const checkWithdrawTwoDice = async function (provider, program, wallet, counter)
         const signedTx = await wallet.signTransaction(tx)
         const txId = await provider.connection.sendRawTransaction(signedTx.serialize())
         await provider.connection.confirmTransaction(txId)
-        //const account = await program.account.degenPredictionNums.fetch(_wallet_pda)
+        const account = await program.account.degenPredictionNums.fetch(_wallet_pda)
 
-       // console.log(account)
-        let msg = "You lost " + 0.5 + "SOL. GG"
+        console.log(account)
+        let msg = "You win " + account.amount/LAMPORTS_PER_SOL * 3 + " SOL. GG"
 
-        // let result_k = Object.keys(account.result)
-        // if (result_k[0] == "lost"){
-        //     msg = "You lost " + account.amount/LAMPORTS_PER_SOL + "SOL. GG"
-        // }
+        let result_k = Object.keys(account.result)
+        if (result_k[0] == "lost"){
+             msg = "You lost " + account.amount/LAMPORTS_PER_SOL + " SOL. GG"
+         }
         console.log(msg)
         return  msg
         
